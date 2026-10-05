@@ -1,0 +1,24 @@
+% Zurich Biosecurity Hub, final poster: the site's cool (left) and warm (right)
+% light sources on deep petrol.
+\documentclass{article}
+\input{common/preamble}
+\input{common/org-bio}
+\newcommand\Background{%
+  \fill[bioDeep] (0,0) rectangle (297,420);
+  \fill[bioCyan, opacity=0.85, path fading=glow] (-30,300) ellipse (190 and 240);
+  \fill[bioWarm, opacity=0.9, path fading=glow] (330,160) ellipse (200 and 250);}
+\newcommand\KickerFont{\plexmonomedium}
+\newcommand\NameFont{\plexbold\fs{126}{120}}
+\newcommand\BodyFont{\plexmedium}
+\newcommand\CardHeadFont{\plexsemi}
+\newcommand\MonoFont{\plexmonomedium}
+\newcommand\TextColor{bioPaper}
+\newcommand\KickerColor{bioPaper}
+\newcommand\CardColor{bioPaper}
+\newcommand\CardInk{bioPetrol}
+\newcommand\AccentColor{bioOrange}
+\newcommand\Kicker{BIOSECURITY · ZURICH}
+\newcommand\NameLines{Zurich\\Biosecurity\\Hub}
+\newcommand\CardLabel{TALKS · READING GROUP · FELLOWSHIP}
+\input{common/layout}
+\begin{document}\MakePoster\end{document}

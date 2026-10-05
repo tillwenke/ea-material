@@ -1,0 +1,25 @@
+% Zurich AI Safety, final poster: the site's red glow on navy with a dot lattice.
+\documentclass{article}
+\input{common/preamble}
+\input{common/org-zais}
+\newcommand\Background{%
+  \fill[zaisNavy] (0,0) rectangle (297,420);
+  \fill[zaisRed, path fading=glow] (250,170) circle (260);
+  \fill[zaisRed!60!yellow, opacity=0.6, path fading=glow] (280,140) circle (110);
+  \foreach \x in {0,12,...,300} \foreach \y in {0,12,...,420}
+    \fill[zaisCream, opacity=0.18] (\x,\y) circle (0.7);}
+\newcommand\KickerFont{\jbmonomedium}
+\newcommand\NameFont{\interdisplayblack\fs{140}{128}\addfontfeature{LetterSpace=-3}}
+\newcommand\BodyFont{\intermedium}
+\newcommand\CardHeadFont{\interdisplay}
+\newcommand\MonoFont{\jbmonomedium}
+\newcommand\TextColor{white}
+\newcommand\KickerColor{zaisCream}
+\newcommand\CardColor{zaisCream}
+\newcommand\CardInk{zaisNavy}
+\newcommand\AccentColor{zaisRed}
+\newcommand\Kicker{AI SAFETY · ZURICH}
+\newcommand\NameLines{Zurich\\AI Safety}
+\newcommand\CardLabel{GATHERINGS · TALKS}
+\input{common/layout}
+\begin{document}\MakePoster\end{document}

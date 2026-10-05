@@ -1,0 +1,28 @@
+% Shared layout for the final posters: dark field with brand-coloured light,
+% kicker, big name, tagline and a QR card at the bottom.
+% Each poster defines before \input{common/layout}:
+%   \Background      TikZ code drawing the full-page field (clipped)
+%   \KickerFont \NameFont \BodyFont \CardHeadFont \MonoFont
+%   \TextColor \KickerColor \CardColor \CardInk \AccentColor   (colour names)
+%   \Kicker \NameLines \CardLabel
+\newcommand\MakePoster{%
+\begin{poster}
+  \begin{scope}
+    \clip (0,0) rectangle (297,420);
+    \Background
+  \end{scope}
+  \node[anchor=north west, inner sep=0, text=\KickerColor, font=\KickerFont\fs{22}{26}]
+    at (24,394) {\Kicker};
+  \node[name=title, anchor=north west, inner sep=0, text=\TextColor, font=\NameFont]
+    at (20,372) {\NameLines};
+  \node[anchor=north west, inner sep=0, text width=240mm, text=\TextColor,
+        font=\BodyFont\fs{38}{48}] at ($(title.south west)+(4,-18)$) {\Tagline};
+  \fill[\CardColor] (24,24) rectangle (273,122);
+  \node[anchor=south east, inner sep=0, text=\CardInk] at (264,33) {\qr{80}{\Url}};
+  \node[anchor=north west, inner sep=0, text=\AccentColor, font=\MonoFont\fs{17}{20}]
+    at (36,110) {\CardLabel};
+  \node[anchor=north west, inner sep=0, text=\CardInk, font=\CardHeadFont\fs{48}{52}]
+    at (36,94) {Join us.};
+  \node[anchor=south west, inner sep=0, text=\CardInk, font=\MonoFont\fs{17}{20}]
+    at (36,36) {\UrlShort};
+\end{poster}}

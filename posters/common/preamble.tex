@@ -1,0 +1,78 @@
+% Shared preamble for all A3 posters. Compile with LuaLaTeX (see Makefile).
+\usepackage[paperwidth=297mm,paperheight=420mm,margin=0mm]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc,fadings,shadings}
+% Radial glow: opaque centre fading to fully transparent at the edge.
+\tikzfading[name=glow, inner color=transparent!0, outer color=transparent!100]
+\usepackage{qrcode}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% ---- fonts (bundled in ../fonts, all SIL OFL) ------------------------------
+\defaultfontfeatures{Path=../fonts/, Extension=.ttf, Ligatures=TeX}
+% EA Switzerland: Barlow
+\newfontfamily\barlow[UprightFont=Barlow-Regular, BoldFont=Barlow-Bold,
+  ItalicFont=Barlow-Italic]{Barlow-Regular}
+\newfontfamily\barlowmedium{Barlow-Medium}
+\newfontfamily\barlowsemi{Barlow-SemiBold}
+\newfontfamily\barlowxbold{Barlow-ExtraBold}
+\newfontfamily\barlowblack{Barlow-Black}
+% Zurich AI Safety: Inter + JetBrains Mono
+\newfontfamily\inter[UprightFont=Inter-Regular, BoldFont=Inter-Bold,
+  ItalicFont=Inter-Italic]{Inter-Regular}
+\newfontfamily\intermedium{Inter-Medium}
+\newfontfamily\intersemi{Inter-SemiBold}
+\newfontfamily\interdisplay{InterDisplay-Bold}
+\newfontfamily\interdisplayxbold{InterDisplay-ExtraBold}
+\newfontfamily\interdisplayblack{InterDisplay-Black}
+\newfontfamily\jbmono[UprightFont=JetBrainsMono-Regular,
+  BoldFont=JetBrainsMono-Bold]{JetBrainsMono-Regular}
+\newfontfamily\jbmonomedium{JetBrainsMono-Medium}
+% Zurich Biosecurity Hub: IBM Plex Sans + Plex Mono
+\newfontfamily\plex[UprightFont=IBMPlexSans-Regular,
+  BoldFont=IBMPlexSans-Bold]{IBMPlexSans-Regular}
+\newfontfamily\plexlight{IBMPlexSans-Light}
+\newfontfamily\plexmedium{IBMPlexSans-Medium}
+\newfontfamily\plexsemi{IBMPlexSans-SemiBold}
+\newfontfamily\plexbold{IBMPlexSans-Bold}
+\newfontfamily\plexmono{IBMPlexMono-Regular}
+\newfontfamily\plexmonomedium{IBMPlexMono-Medium}
+
+% ---- brand colours (taken from the three websites) -------------------------
+% effectivealtruism.ch
+\definecolor{eaTeal}{HTML}{068193}
+\definecolor{eaTealDark}{HTML}{04515C}
+\definecolor{eaTealLight}{HTML}{DDF0F2}
+\definecolor{eaInk}{HTML}{14232A}
+\definecolor{eaPaper}{HTML}{FAFAF7}
+\definecolor{eaSky}{HTML}{8EB6DC}   % site "darkAccent" hsl(209,53%,71%)
+\definecolor{eaNight}{HTML}{0A1C24}
+% zurich.aisafety.ch
+\definecolor{zaisRed}{HTML}{DE2C00}
+\definecolor{zaisNavy}{HTML}{020522}
+\definecolor{zaisCream}{HTML}{F7F3E7}
+\definecolor{zaisSand}{HTML}{EAE2CE}
+\definecolor{zaisBlue}{HTML}{2E6BF5}
+% zurichbiosecurity.ch (brand kit v1.0)
+\definecolor{bioPetrol}{HTML}{12333B}
+\definecolor{bioDeep}{HTML}{0D2830}
+\definecolor{bioPaper}{HTML}{F4F1EA}
+\definecolor{bioOrange}{HTML}{C8552A}
+\definecolor{bioSlate}{HTML}{6E8C93}
+\definecolor{bioCyan}{HTML}{6FD2E2}
+\definecolor{bioWarm}{HTML}{FF9468}
+
+% ---- helpers ---------------------------------------------------------------
+\newcommand\fs[2]{\fontsize{#1}{#2}\selectfont}
+% Full-page canvas in millimetres, origin bottom-left, page is 297 x 420.
+\newenvironment{poster}
+  {\begin{tikzpicture}[remember picture, overlay, x=1mm, y=1mm,
+     shift={(current page.south west)}]}
+  {\end{tikzpicture}}
+% \qr{size in mm}{url}: QR code drawn in the current text colour.
+\newcommand\qr[2]{\qrcode[height=#1mm, level=M]{#2}}
+% Honour \\ in every node and keep text ragged-right without hyphenation.
+\tikzset{every node/.append style={align=left}}
+\lefthyphenmin=64

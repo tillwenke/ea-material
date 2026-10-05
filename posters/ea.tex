@@ -1,0 +1,23 @@
+% EA at ETH, final poster: teal (left) and sky-blue (right) light on night teal.
+\documentclass{article}
+\input{common/preamble}
+\input{common/org-ea}
+\newcommand\Background{%
+  \fill[eaNight] (0,0) rectangle (297,420);
+  \fill[eaTeal, opacity=0.95, path fading=glow] (-30,300) ellipse (200 and 250);
+  \fill[eaSky, opacity=1, path fading=glow] (330,160) ellipse (200 and 250);}
+\newcommand\KickerFont{\barlowsemi\addfontfeature{LetterSpace=12}}
+\newcommand\NameFont{\barlowblack\fs{150}{136}}
+\newcommand\BodyFont{\barlowmedium}
+\newcommand\CardHeadFont{\barlowblack}
+\newcommand\MonoFont{\barlowsemi\addfontfeature{LetterSpace=8}}
+\newcommand\TextColor{white}
+\newcommand\KickerColor{eaTealLight}
+\newcommand\CardColor{white}
+\newcommand\CardInk{eaInk}
+\newcommand\AccentColor{eaTeal}
+\newcommand\Kicker{EA · ZURICH}
+\newcommand\NameLines{Effective\\Altruism\\at ETH}
+\newcommand\CardLabel{LUNCHES · DEEP DIVES}
+\input{common/layout}
+\begin{document}\MakePoster\end{document}
