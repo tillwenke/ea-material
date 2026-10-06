@@ -11,7 +11,7 @@ pdf/%.pdf: posters/%.tex posters/common/*.tex posters/common/qr/*.tex
 
 previews: all
 	@mkdir -p previews
-	for f in pdf/*.pdf; do pdftoppm -png -r 30 -singlefile $$f previews/$$(basename $$f .pdf); done
+	for f in pdf/*.pdf; do pdftoppm -png -r 50 -singlefile $$f previews/$$(basename $$f .pdf); done
 
 clean:
 	rm -rf build
