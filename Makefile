@@ -4,7 +4,7 @@ PDFS    := $(patsubst posters/%.tex,pdf/%.pdf,$(POSTERS))
 
 all: $(PDFS)
 
-pdf/%.pdf: posters/%.tex posters/common/*.tex
+pdf/%.pdf: posters/%.tex posters/common/*.tex posters/common/qr/*.tex
 	@mkdir -p build pdf
 	cd posters && latexmk -lualatex -interaction=nonstopmode -halt-on-error -outdir=../build $*.tex
 	cp build/$*.pdf $@

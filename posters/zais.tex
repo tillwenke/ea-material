@@ -1,25 +1,38 @@
-% Zurich AI Safety, final poster: the site's red glow on navy with a dot lattice.
+% Zurich AI Safety, final poster, following the ZAIS brand guide v02.3:
+% diagonal gradient with a faint "weight field", Geist headlines, Sky labels,
+% white card with a red label, thin rules and a dashed pill around the link.
 \documentclass{article}
 \input{common/preamble}
 \input{common/org-zais}
 \newcommand\Background{%
-  \fill[zaisNavy] (0,0) rectangle (297,420);
-  \fill[zaisRed, path fading=glow] (250,170) circle (260);
-  \fill[zaisRed!60!yellow, opacity=0.6, path fading=glow] (280,140) circle (110);
-  \foreach \x in {0,12,...,300} \foreach \y in {0,12,...,420}
-    \fill[zaisCream, opacity=0.18] (\x,\y) circle (0.7);}
-\newcommand\KickerFont{\jbmonomedium}
-\newcommand\NameFont{\interdisplayblack\fs{140}{128}\addfontfeature{LetterSpace=-3}}
-\newcommand\BodyFont{\intermedium}
-\newcommand\CardHeadFont{\interdisplay}
-\newcommand\MonoFont{\jbmonomedium}
+  \shade[left color=zaisGradTop, right color=zaisGradBottom, shading angle=-45]
+    (0,0) rectangle (297,420);
+  \pgfmathsetseed{2026}
+  \foreach \x in {6,24,...,290} \foreach \y in {6,16,...,416} {
+    \pgfmathsetmacro\w{rand}
+    \node[text=zaisSky, opacity=0.13, font=\jbmono\fs{7}{8}, inner sep=0]
+      at (\x,\y) {\pgfmathprintnumber[fixed, fixed zerofill, precision=2, assume math mode,
+        showpos]{\w}};}}
+\newcommand\KickerFont{\jbmonomedium\addfontfeature{LetterSpace=20}}
+\newcommand\NameFont{\geistsemi\fs{140}{128}\addfontfeature{LetterSpace=-2}}
+\newcommand\BodyFont{\inter}
+\newcommand\CardHeadFont{\geistsemi}
+\newcommand\MonoFont{\jbmonomedium\addfontfeature{LetterSpace=8}}
 \newcommand\TextColor{white}
-\newcommand\KickerColor{zaisCream}
-\newcommand\CardColor{zaisCream}
+\newcommand\BodyColor{zaisBodyDark}
+\newcommand\KickerColor{zaisSky}
+\newcommand\CardColor{white}
 \newcommand\CardInk{zaisNavy}
 \newcommand\AccentColor{zaisRed}
-\newcommand\Kicker{AI SAFETY · ZURICH}
+\newcommand\Kicker{ZAIS}
 \newcommand\NameLines{Zurich\\AI Safety}
-\newcommand\CardLabel{GATHERINGS · TALKS}
+\newcommand\CardLabel{TALKS · DISCUSSIONS}
+% Label + thin line before each headline, and the dashed pill button.
+\newcommand\Extras{%
+  \draw[zaisSky, line width=0.5pt] (24,382) -- (273,382);
+  \draw[zaisNavy, line width=0.5pt] (36,101) -- (172,101);
+  \draw[zaisNavy, line width=0.8pt, dash pattern=on 2mm off 1.5mm,
+        rounded corners=6.5mm]
+    ($(url.south west)+(-6,-4)$) rectangle ($(url.north east)+(6,4)$);}
 \input{common/layout}
 \begin{document}\MakePoster\end{document}

@@ -5,24 +5,29 @@
 %   \KickerFont \NameFont \BodyFont \CardHeadFont \MonoFont
 %   \TextColor \KickerColor \CardColor \CardInk \AccentColor   (colour names)
 %   \Kicker \NameLines \CardLabel
+% and may define \Extras, TikZ code drawn last (nodes kicker, cardlabel, url).
+% \BodyColor (tagline) defaults to \TextColor.
+\providecommand\Extras{}
+\providecommand\BodyColor{\TextColor}
 \newcommand\MakePoster{%
 \begin{poster}
   \begin{scope}
     \clip (0,0) rectangle (297,420);
     \Background
   \end{scope}
-  \node[anchor=north west, inner sep=0, text=\KickerColor, font=\KickerFont\fs{22}{26}]
+  \node[name=kicker, anchor=north west, inner sep=0, text=\KickerColor, font=\KickerFont\fs{22}{26}]
     at (24,394) {\Kicker};
   \node[name=title, anchor=north west, inner sep=0, text=\TextColor, font=\NameFont]
     at (20,372) {\NameLines};
-  \node[anchor=north west, inner sep=0, text width=240mm, text=\TextColor,
+  \node[anchor=north west, inner sep=0, text width=240mm, text=\BodyColor,
         font=\BodyFont\fs{38}{48}] at ($(title.south west)+(4,-18)$) {\Tagline};
   \fill[\CardColor] (24,24) rectangle (273,122);
-  \node[anchor=south east, inner sep=0, text=\CardInk] at (264,33) {\qr{80}{\Url}};
-  \node[anchor=north west, inner sep=0, text=\AccentColor, font=\MonoFont\fs{17}{20}]
+  \qr{264}{33}{80}
+  \node[name=cardlabel, anchor=north west, inner sep=0, text=\AccentColor, font=\MonoFont\fs{17}{20}]
     at (36,110) {\CardLabel};
   \node[anchor=north west, inner sep=0, text=\CardInk, font=\CardHeadFont\fs{48}{52}]
     at (36,94) {Join us.};
-  \node[anchor=south west, inner sep=0, text=\CardInk, font=\MonoFont\fs{17}{20}]
+  \node[name=url, anchor=south west, inner sep=0, text=\CardInk, font=\MonoFont\fs{17}{20}]
     at (36,36) {\UrlShort};
+  \Extras
 \end{poster}}

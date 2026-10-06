@@ -6,7 +6,6 @@
 \usetikzlibrary{calc,fadings,shadings}
 % Radial glow: opaque centre fading to fully transparent at the edge.
 \tikzfading[name=glow, inner color=transparent!0, outer color=transparent!100]
-\usepackage{qrcode}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 
@@ -19,7 +18,8 @@
 \newfontfamily\barlowsemi{Barlow-SemiBold}
 \newfontfamily\barlowxbold{Barlow-ExtraBold}
 \newfontfamily\barlowblack{Barlow-Black}
-% Zurich AI Safety: Inter + JetBrains Mono
+% Zurich AI Safety: Geist SemiBold + Inter + JetBrains Mono
+\newfontfamily\geistsemi{Geist-SemiBold}
 \newfontfamily\inter[UprightFont=Inter-Regular, BoldFont=Inter-Bold,
   ItalicFont=Inter-Italic]{Inter-Regular}
 \newfontfamily\intermedium{Inter-Medium}
@@ -49,12 +49,15 @@
 \definecolor{eaPaper}{HTML}{FAFAF7}
 \definecolor{eaSky}{HTML}{8EB6DC}   % site "darkAccent" hsl(209,53%,71%)
 \definecolor{eaNight}{HTML}{0A1C24}
-% zurich.aisafety.ch
-\definecolor{zaisRed}{HTML}{DE2C00}
-\definecolor{zaisNavy}{HTML}{020522}
-\definecolor{zaisCream}{HTML}{F7F3E7}
-\definecolor{zaisSand}{HTML}{EAE2CE}
-\definecolor{zaisBlue}{HTML}{2E6BF5}
+% ZAIS brand guide v02.3 (28 Sep 2026)
+\definecolor{zaisNavy}{HTML}{020522}      % Dark Blue
+\definecolor{zaisBlue}{HTML}{2246BA}      % Zurich Blue
+\definecolor{zaisSky}{HTML}{82A6E4}
+\definecolor{zaisBeige}{HTML}{FBF8EF}
+\definecolor{zaisRed}{HTML}{DE2C00}       % small labels on white only
+\definecolor{zaisGradTop}{HTML}{050A1E}   % gradient, top left
+\definecolor{zaisGradBottom}{HTML}{2144B8}% gradient, bottom right
+\definecolor{zaisBodyDark}{HTML}{D3D1CE}  % body text on dark
 % zurichbiosecurity.ch (brand kit v1.0)
 \definecolor{bioPetrol}{HTML}{12333B}
 \definecolor{bioDeep}{HTML}{0D2830}
@@ -71,8 +74,12 @@
   {\begin{tikzpicture}[remember picture, overlay, x=1mm, y=1mm,
      shift={(current page.south west)}]}
   {\end{tikzpicture}}
-% \qr{size in mm}{url}: QR code drawn in the current text colour.
-\newcommand\qr[2]{\qrcode[height=#1mm, level=M]{#2}}
+% \qr{x}{y}{size}: the org's QR code (\QrPath, from common/qr/*.tex) in
+% \CardInk, size mm square with its bottom-right corner at (x,y).
+\newcommand\qr[3]{%
+  \begin{scope}[shift={(#1-#3,#2+#3)}, x=#3mm/\QrModules, y=#3mm/\QrModules]
+    \fill[\CardInk] \QrPath;
+  \end{scope}}
 % Honour \\ in every node and keep text ragged-right without hyphenation.
 \tikzset{every node/.append style={align=left}}
 \lefthyphenmin=64
