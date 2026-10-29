@@ -1,0 +1,60 @@
+% IBIS screen ad for one Luma event: 1920 x 1080 px (1 bp = 1 px), 16:9.
+% Not compiled directly: scripts/ibis.py writes a file that defines
+%   \Org (ea, zais, bio)  \EventTitle \TitleSize \TitleLead \Blurb
+%   \Day \Where \UrlShort  and the event's QR code (\QrModules, \QrPath)
+% and then does \input{ibis} from this directory.
+% If the text column runs into the date block, "IBIS-OVERLAP" goes to the
+% log so the script can retry with smaller type.
+\documentclass{article}
+\usepackage[paperwidth=1920bp,paperheight=1080bp,margin=0bp]{geometry}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc,fadings,shadings}
+% Radial glow: opaque centre fading to fully transparent at the edge.
+\tikzfading[name=glow, inner color=transparent!0, outer color=transparent!100]
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\frenchspacing
+\input{../posters/common/brand}
+\renewcommand\QrUnit{bp}
+\input{style/\Org}
+\providecommand\Extras{}
+\providecommand\BodyColor{\TextColor}
+\begin{document}
+\begin{tikzpicture}[remember picture, overlay, x=1bp, y=1bp,
+    shift={(current page.south west)}]
+  \begin{scope}
+    \clip (0,0) rectangle (1920,1080);
+    \Background
+  \end{scope}
+  % Left column: kicker, event title, blurb; date and place at the bottom.
+  \node[name=kicker, anchor=north west, inner sep=0, text=\KickerColor,
+        font=\KickerFont\fs{28}{32}] at (96,984) {\Kicker};
+  \node[name=title, anchor=north west, inner sep=0, text width=1140bp,
+        text=\TextColor, font=\NameFont\fs{\TitleSize}{\TitleLead}]
+    at (92,918) {\EventTitle};
+  \node[name=blurb, anchor=north west, inner sep=0, text width=1080bp,
+        text=\BodyColor, font=\BodyFont\fs{40}{52}]
+    at ($(title.south west)+(4,-44)$) {\Blurb};
+  \node[name=where, anchor=south west, inner sep=0, text width=1140bp,
+        text=\KickerColor, font=\BodyFont\fs{40}{52}] at (96,96) {\Where};
+  \node[name=facts, anchor=south west, inner sep=0, text width=1140bp,
+        text=\TextColor, font=\CardHeadFont\fs{64}{76}]
+    at ($(where.north west)+(0,12)$) {\Day};
+  % Right: sign-up card with the event's QR code above its short link.
+  \fill[\CardColor] (1344,96) rectangle (1824,772);
+  \node[name=cardlabel, anchor=north west, inner sep=0, text=\AccentColor,
+        font=\MonoFont\fs{24}{28}] at (1392,724) {\CardLabel};
+  \node[anchor=north west, inner sep=0, text=\CardInk, font=\CardHeadFont\fs{72}{80}]
+    at (1392,680) {Join us.};
+  \qr{1776}{200}{384}
+  \node[name=url, anchor=south west, inner sep=0, text=\CardInk,
+        font=\MonoFont\fs{24}{28}] at (1392,136) {\UrlShort};
+  \Extras
+  % Report when the blurb (or title) comes within 40 px of the date block.
+  \pgfpointanchor{blurb}{south}\pgfgetlastxy{\textx}{\texty}
+  \pgfpointanchor{facts}{north}\pgfgetlastxy{\factsx}{\factsy}
+  \ifdim\texty<\dimexpr\factsy+40bp\relax\typeout{IBIS-OVERLAP}\fi
+\end{tikzpicture}
+\end{document}

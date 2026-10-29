@@ -13,7 +13,11 @@ previews: all
 	@mkdir -p previews
 	for f in pdf/*.pdf; do pdftoppm -png -r 50 -singlefile $$f previews/$$(basename $$f .pdf); done
 
+# IBIS screen ad for one Luma event: make ibis URL=https://luma.com/abcd1234 [ORG=zais]
+ibis:
+	python3 scripts/ibis.py $(URL) $(if $(ORG),--org $(ORG))
+
 clean:
 	rm -rf build
 
-.PHONY: all clean previews
+.PHONY: all clean previews ibis

@@ -9,77 +9,11 @@
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 
-% ---- fonts (bundled in ../fonts, all SIL OFL) ------------------------------
-\defaultfontfeatures{Path=../fonts/, Extension=.ttf, Ligatures=TeX}
-% EA Switzerland: Barlow
-\newfontfamily\barlow[UprightFont=Barlow-Regular, BoldFont=Barlow-Bold,
-  ItalicFont=Barlow-Italic]{Barlow-Regular}
-\newfontfamily\barlowmedium{Barlow-Medium}
-\newfontfamily\barlowsemi{Barlow-SemiBold}
-\newfontfamily\barlowxbold{Barlow-ExtraBold}
-\newfontfamily\barlowblack{Barlow-Black}
-% Zurich AI Safety: Geist SemiBold + Inter + JetBrains Mono
-\newfontfamily\geistsemi{Geist-SemiBold}
-\newfontfamily\inter[UprightFont=Inter-Regular, BoldFont=Inter-Bold,
-  ItalicFont=Inter-Italic]{Inter-Regular}
-\newfontfamily\intermedium{Inter-Medium}
-\newfontfamily\intersemi{Inter-SemiBold}
-\newfontfamily\interdisplay{InterDisplay-Bold}
-\newfontfamily\interdisplayxbold{InterDisplay-ExtraBold}
-\newfontfamily\interdisplayblack{InterDisplay-Black}
-\newfontfamily\jbmono[UprightFont=JetBrainsMono-Regular,
-  BoldFont=JetBrainsMono-Bold]{JetBrainsMono-Regular}
-\newfontfamily\jbmonomedium{JetBrainsMono-Medium}
-% Zurich Biosecurity Hub: IBM Plex Sans + Plex Mono
-\newfontfamily\plex[UprightFont=IBMPlexSans-Regular,
-  BoldFont=IBMPlexSans-Bold]{IBMPlexSans-Regular}
-\newfontfamily\plexlight{IBMPlexSans-Light}
-\newfontfamily\plexmedium{IBMPlexSans-Medium}
-\newfontfamily\plexsemi{IBMPlexSans-SemiBold}
-\newfontfamily\plexbold{IBMPlexSans-Bold}
-\newfontfamily\plexmono{IBMPlexMono-Regular}
-\newfontfamily\plexmonomedium{IBMPlexMono-Medium}
+\input{common/brand}
 
-% ---- brand colours (taken from the three websites) -------------------------
-% effectivealtruism.ch
-\definecolor{eaTeal}{HTML}{068193}
-\definecolor{eaTealDark}{HTML}{04515C}
-\definecolor{eaTealLight}{HTML}{DDF0F2}
-\definecolor{eaInk}{HTML}{14232A}
-\definecolor{eaPaper}{HTML}{FAFAF7}
-\definecolor{eaSky}{HTML}{8EB6DC}   % site "darkAccent" hsl(209,53%,71%)
-\definecolor{eaNight}{HTML}{0A1C24}
-% ZAIS brand guide v02.3 (28 Sep 2026)
-\definecolor{zaisNavy}{HTML}{020522}      % Dark Blue
-\definecolor{zaisBlue}{HTML}{2246BA}      % Zurich Blue
-\definecolor{zaisSky}{HTML}{82A6E4}
-\definecolor{zaisBeige}{HTML}{FBF8EF}
-\definecolor{zaisRed}{HTML}{DE2C00}       % small labels on white only
-\definecolor{zaisGradTop}{HTML}{050A1E}   % gradient, top left
-\definecolor{zaisGradBottom}{HTML}{2144B8}% gradient, bottom right
-\definecolor{zaisBodyDark}{HTML}{D3D1CE}  % body text on dark
-% zurichbiosecurity.ch (brand kit v1.0)
-\definecolor{bioPetrol}{HTML}{12333B}
-\definecolor{bioDeep}{HTML}{0D2830}
-\definecolor{bioPaper}{HTML}{F4F1EA}
-\definecolor{bioOrange}{HTML}{C8552A}
-\definecolor{bioSlate}{HTML}{6E8C93}
-\definecolor{bioCyan}{HTML}{6FD2E2}
-\definecolor{bioWarm}{HTML}{FF9468}
-
-% ---- helpers ---------------------------------------------------------------
-\newcommand\fs[2]{\fontsize{#1}{#2}\selectfont}
+% ---- poster canvas ---------------------------------------------------------
 % Full-page canvas in millimetres, origin bottom-left, page is 297 x 420.
 \newenvironment{poster}
   {\begin{tikzpicture}[remember picture, overlay, x=1mm, y=1mm,
      shift={(current page.south west)}]}
   {\end{tikzpicture}}
-% \qr{x}{y}{size}: the org's QR code (\QrPath, from common/qr/*.tex) in
-% \CardInk, size mm square with its bottom-right corner at (x,y).
-\newcommand\qr[3]{%
-  \begin{scope}[shift={(#1-#3,#2+#3)}, x=#3mm/\QrModules, y=#3mm/\QrModules]
-    \fill[\CardInk] \QrPath;
-  \end{scope}}
-% Honour \\ in every node and keep text ragged-right without hyphenation.
-\tikzset{every node/.append style={align=left}}
-\lefthyphenmin=64

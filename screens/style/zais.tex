@@ -1,0 +1,31 @@
+% Zurich AI Safety, following the ZAIS brand guide v02.3: diagonal gradient
+% with a faint "weight field", Geist headlines, Sky labels, white card with a
+% red label, thin rules and a dashed pill around the link.
+\newcommand\Background{%
+  \shade[left color=zaisGradTop, right color=zaisGradBottom, shading angle=-45]
+    (0,0) rectangle (1920,1080);
+  \pgfmathsetseed{2026}
+  \foreach \x in {40,152,...,1900} \foreach \y in {30,86,...,1070} {
+    \pgfmathsetmacro\w{rand}
+    \node[text=zaisSky, opacity=0.13, font=\jbmono\fs{16}{18}, inner sep=0]
+      at (\x,\y) {\pgfmathprintnumber[fixed, fixed zerofill, precision=2, assume math mode,
+        showpos]{\w}};}}
+\newcommand\KickerFont{\jbmonomedium\addfontfeature{LetterSpace=20}}
+\newcommand\NameFont{\geistsemi\addfontfeature{LetterSpace=-2}}
+\newcommand\BodyFont{\inter}
+\newcommand\CardHeadFont{\geistsemi}
+\newcommand\MonoFont{\jbmonomedium\addfontfeature{LetterSpace=8}}
+\newcommand\TextColor{white}
+\newcommand\BodyColor{zaisBodyDark}
+\newcommand\KickerColor{zaisSky}
+\newcommand\CardColor{white}
+\newcommand\CardInk{zaisNavy}
+\newcommand\AccentColor{zaisRed}
+\newcommand\Kicker{ZURICH AI SAFETY}
+\newcommand\CardLabel{SCAN TO SIGN UP}
+% Rule under the kicker, rule under the card label, dashed pill around the link.
+\newcommand\Extras{%
+  \draw[zaisSky, line width=1.5bp] (96,944) -- (1824,944);
+  \draw[zaisNavy, line width=1.5bp] (1392,692) -- (1776,692);
+  \draw[zaisNavy, line width=2bp, dash pattern=on 8bp off 6bp, rounded corners=24bp]
+    ($(url.south west)+(-18,-14)$) rectangle ($(url.north east)+(18,14)$);}
